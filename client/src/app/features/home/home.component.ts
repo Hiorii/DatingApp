@@ -4,8 +4,12 @@ import {Component, OnInit} from '@angular/core';
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   registerMode = false;
+
+  ngOnInit() {
+    console.log('works')
+  }
 
   registerToggle() {
     this.registerMode = !this.registerMode;

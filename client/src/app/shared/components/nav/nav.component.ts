@@ -3,6 +3,7 @@ import {AccountService} from "../../services/account.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserAuthenticationModel} from "../../../core/models/user-authentication.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +14,7 @@ export class NavComponent implements OnInit {
   model: UserAuthenticationModel;
   loginForm: FormGroup;
 
-  constructor(public accountService: AccountService, private router: Router, private fb: FormBuilder) { }
+  constructor(public accountService: AccountService, private router: Router, private fb: FormBuilder, private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -31,14 +32,14 @@ export class NavComponent implements OnInit {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value
     }
-    this.accountService.login(this.model).subscribe(response => {
-
-      // this.router.navigateByUrl('/members');
+    this.accountService.login(this.model).subscribe({
+      next: _ => this.router.navigateByUrl('/members'),
+      error: error => this.toast.error(error.error)
     })
   }
 
   logout() {
     this.accountService.logout();
-    // this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/')
   }
 }

@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ComponentsModule} from "./shared/components/components.module";
 import {RouterModule} from "@angular/router";
 import {FeaturesModule} from "./features/features.module";
+import {MembersModule} from "./features/members/members.module";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +19,8 @@ import {FeaturesModule} from "./features/features.module";
     BrowserAnimationsModule,
     ComponentsModule,
     RouterModule,
-    FeaturesModule
+    FeaturesModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
